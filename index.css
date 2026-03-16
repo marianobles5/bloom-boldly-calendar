@@ -1,0 +1,630 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Lato:wght@300;400;700&display=swap');
+
+/* ============================================================
+   CSS VARIABLES — BLOOM BOLDLY DESIGN TOKENS
+   ============================================================ */
+:root {
+  --bg-deep:        #0e060b;
+  --bg-mid:         #1a0a14;
+  --bg-card:        rgba(255, 255, 255, 0.035);
+  --bg-card-hover:  rgba(255, 255, 255, 0.07);
+  --bg-card-done:   rgba(232, 160, 184, 0.08);
+  --border:         rgba(255, 255, 255, 0.08);
+  --border-accent:  rgba(232, 160, 184, 0.35);
+  --border-done:    rgba(232, 160, 184, 0.5);
+  --pink-light:     #f9d5e0;
+  --pink-mid:       #e8a0b8;
+  --pink-dark:      #c9859a;
+  --pink-deep:      #b87a91;
+  --rose:           #d4607a;
+  --text-primary:   #f5e6ea;
+  --text-secondary: #c9859a;
+  --text-muted:     #7a4a5a;
+  --gold:           #e8c97a;
+  --lavender:       #c9b8e8;
+  --sage:           #a0c8b4;
+  --font-display:   'Playfair Display', Georgia, serif;
+  --font-body:      'Lato', sans-serif;
+  --radius-sm:      8px;
+  --radius-md:      16px;
+  --radius-lg:      24px;
+  --shadow-glow:    0 0 40px rgba(232, 160, 184, 0.1);
+  --shadow-card:    0 8px 32px rgba(0, 0, 0, 0.4);
+  --shadow-hover:   0 20px 48px rgba(232, 160, 184, 0.18);
+  --transition:     all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* ============================================================
+   RESET & BASE
+   ============================================================ */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: 16px;
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--bg-deep);
+  background-image:
+    radial-gradient(ellipse 80% 60% at 20% 10%, rgba(180, 60, 100, 0.08) 0%, transparent 60%),
+    radial-gradient(ellipse 60% 50% at 80% 80%, rgba(100, 40, 80, 0.06) 0%, transparent 60%);
+  color: var(--text-primary);
+  font-family: var(--font-body);
+  font-weight: 400;
+  line-height: 1.6;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* ============================================================
+   TYPOGRAPHY
+   ============================================================ */
+h1, h2, h3, h4 {
+  font-family: var(--font-display);
+  line-height: 1.2;
+  font-weight: 600;
+}
+
+/* ============================================================
+   LAYOUT WRAPPERS
+   ============================================================ */
+.page-wrapper {
+  min-height: 100vh;
+  position: relative;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
+
+/* ============================================================
+   HEADER
+   ============================================================ */
+.app-header {
+  text-align: center;
+  padding: 3.5rem 1.5rem 2rem;
+  position: relative;
+}
+
+.app-header .eyebrow {
+  font-family: var(--font-body);
+  font-size: 0.7rem;
+  letter-spacing: 0.35em;
+  color: var(--pink-mid);
+  text-transform: uppercase;
+  margin-bottom: 0.75rem;
+}
+
+.app-header h1 {
+  font-size: clamp(2.2rem, 6vw, 4.2rem);
+  font-weight: 700;
+  font-style: italic;
+  background: linear-gradient(135deg, #f9d5e0, #e8a0b8, #fce4ec, #d4a0b8, #f9d5e0);
+  background-size: 300% 300%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: shimmer 6s ease infinite;
+  margin-bottom: 0.5rem;
+}
+
+.app-header .subtitle {
+  font-family: var(--font-body);
+  font-style: normal;
+  color: var(--pink-dark);
+  font-size: 1rem;
+  margin-bottom: 0;
+}
+
+/* ============================================================
+   PROGRESS SECTION
+   ============================================================ */
+.progress-section {
+  max-width: 480px;
+  margin: 1.5rem auto 0;
+}
+
+.progress-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.5rem;
+  font-size: 0.8rem;
+  color: var(--pink-dark);
+  font-family: var(--font-body);
+}
+
+.progress-meta .label {
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  font-size: 0.7rem;
+}
+
+.progress-bar-track {
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 999px;
+  height: 7px;
+  overflow: hidden;
+  border: 1px solid var(--border);
+}
+
+.progress-bar-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--pink-deep), var(--pink-light));
+  border-radius: 999px;
+  transition: width 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+  min-width: 0%;
+}
+
+/* ============================================================
+   WEEK FILTER TABS
+   ============================================================ */
+.filter-tabs {
+  display: flex;
+  gap: 0.5rem;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin: 2rem auto 0;
+  padding: 0 1.5rem;
+  max-width: 700px;
+}
+
+.filter-btn {
+  padding: 0.45rem 1.1rem;
+  border-radius: 999px;
+  border: 1px solid rgba(232, 160, 184, 0.3);
+  background: transparent;
+  color: var(--pink-dark);
+  cursor: pointer;
+  font-family: var(--font-body);
+  font-size: 0.8rem;
+  letter-spacing: 0.06em;
+  transition: var(--transition);
+}
+
+.filter-btn:hover {
+  background: rgba(232, 160, 184, 0.1);
+  color: var(--pink-light);
+  transform: translateY(-1px);
+}
+
+.filter-btn.active {
+  border-color: var(--pink-mid);
+  background: rgba(232, 160, 184, 0.18);
+  color: var(--pink-light);
+}
+
+/* ============================================================
+   DAY GRID
+   ============================================================ */
+.day-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
+  gap: 1rem;
+  padding: 2rem 1.5rem 4rem;
+  max-width: 1200px;
+  margin: 0 auto;
+  animation: fadeUp 0.4s ease both;
+}
+
+/* ============================================================
+   DAY CARD
+   ============================================================ */
+.day-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  padding: 1.2rem 1rem 1rem;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  transition: var(--transition);
+  box-shadow: var(--shadow-card);
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+}
+
+.day-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(232, 160, 184, 0.04) 0%, transparent 60%);
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.day-card:hover {
+  background: var(--bg-card-hover);
+  border-color: var(--border-accent);
+  transform: translateY(-4px) scale(1.015);
+  box-shadow: var(--shadow-hover);
+}
+
+.day-card:hover::before {
+  opacity: 1;
+}
+
+.day-card.completed {
+  background: var(--bg-card-done);
+  border-color: var(--border-done);
+}
+
+.day-card .day-number {
+  font-family: var(--font-body);
+  font-size: 0.65rem;
+  color: var(--pink-mid);
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+}
+
+.day-card .day-theme {
+  font-family: var(--font-display);
+  font-size: 0.95rem;
+  color: var(--text-primary);
+  font-weight: 600;
+  line-height: 1.3;
+}
+
+.day-card .day-idea {
+  font-family: var(--font-body);
+  font-size: 0.72rem;
+  color: var(--pink-deep);
+  line-height: 1.5;
+  margin-top: 0.1rem;
+}
+
+.day-card .card-tap-hint {
+  font-size: 0.65rem;
+  color: var(--pink-mid);
+  margin-top: 0.5rem;
+}
+
+/* Check circle on card */
+.card-check {
+  position: absolute;
+  top: 0.6rem;
+  right: 0.6rem;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  border: 1px solid rgba(232, 160, 184, 0.45);
+  background: transparent;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 11px;
+  color: var(--bg-deep);
+  cursor: pointer;
+  transition: var(--transition);
+  z-index: 2;
+  font-family: var(--font-body);
+}
+
+.card-check:hover {
+  border-color: var(--pink-mid);
+  background: rgba(232, 160, 184, 0.15);
+}
+
+.card-check.checked {
+  background: var(--pink-mid);
+  border-color: var(--pink-mid);
+}
+
+/* ============================================================
+   DETAIL VIEW
+   ============================================================ */
+.detail-wrapper {
+  max-width: 780px;
+  margin: 0 auto;
+  padding: 0 1.5rem 4rem;
+  animation: fadeUp 0.4s ease both;
+}
+
+/* Back button */
+.back-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1.2rem;
+  border-radius: 999px;
+  border: 1px solid rgba(232, 160, 184, 0.3);
+  background: transparent;
+  color: var(--pink-mid);
+  cursor: pointer;
+  font-family: var(--font-body);
+  font-size: 0.85rem;
+  margin-bottom: 1.5rem;
+  transition: var(--transition);
+}
+
+.back-btn:hover {
+  background: rgba(232, 160, 184, 0.1);
+  color: var(--pink-light);
+  transform: translateX(-3px);
+}
+
+/* Detail card container */
+.detail-card {
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(232, 160, 184, 0.2);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  box-shadow: var(--shadow-glow);
+}
+
+/* Detail header */
+.detail-header {
+  padding: 2rem 2rem 1.5rem;
+  background: linear-gradient(135deg, rgba(232, 160, 184, 0.12), rgba(180, 100, 140, 0.07));
+  border-bottom: 1px solid rgba(232, 160, 184, 0.12);
+}
+
+.detail-header .day-label {
+  font-family: var(--font-body);
+  font-size: 0.7rem;
+  letter-spacing: 0.2em;
+  color: var(--pink-mid);
+  text-transform: uppercase;
+  margin-bottom: 0.4rem;
+}
+
+.detail-header h2 {
+  font-size: clamp(1.5rem, 4vw, 2rem);
+  font-style: italic;
+  color: var(--pink-light);
+  font-weight: 600;
+  margin-bottom: 0.3rem;
+}
+
+.detail-header .detail-idea {
+  color: var(--pink-dark);
+  font-style: italic;
+  font-family: var(--font-body);
+  font-size: 0.9rem;
+}
+
+/* Header action row */
+.detail-actions {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  margin-top: 1.2rem;
+}
+
+.action-btn {
+  padding: 0.45rem 1.1rem;
+  border-radius: 999px;
+  border: 1px solid rgba(232, 160, 184, 0.4);
+  background: transparent;
+  color: var(--text-primary);
+  cursor: pointer;
+  font-family: var(--font-body);
+  font-size: 0.8rem;
+  transition: var(--transition);
+}
+
+.action-btn:hover {
+  background: rgba(232, 160, 184, 0.12);
+}
+
+.action-btn.mark-done {
+  background: rgba(232, 160, 184, 0.28);
+  border-color: var(--pink-mid);
+  color: var(--pink-light);
+}
+
+.action-btn.nav-btn {
+  border-color: rgba(255, 255, 255, 0.12);
+  color: var(--pink-dark);
+}
+
+.action-btn.nav-btn:disabled {
+  opacity: 0.3;
+  cursor: default;
+}
+
+/* Detail body */
+.detail-body {
+  padding: 1.5rem 2rem 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+/* Section blocks */
+.section-block {
+  background: rgba(255, 255, 255, 0.03);
+  border-radius: var(--radius-sm);
+  padding: 1.2rem;
+  border-left: 3px solid var(--pink-mid);
+}
+
+.section-block.hook    { border-left-color: var(--pink-mid); }
+.section-block.visual  { border-left-color: var(--lavender); }
+.section-block.caption { border-left-color: var(--gold); }
+.section-block.cta     { border-left-color: var(--sage); }
+.section-block.todo    { border-left-color: var(--pink-light); }
+.section-block.tags    { border-left-color: #b8d4e8; }
+
+.section-label {
+  font-family: var(--font-body);
+  font-size: 0.62rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  margin-bottom: 0.6rem;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.section-block.hook    .section-label { color: var(--pink-mid); }
+.section-block.visual  .section-label { color: var(--lavender); }
+.section-block.caption .section-label { color: var(--gold); }
+.section-block.cta     .section-label { color: var(--sage); }
+.section-block.todo    .section-label { color: var(--pink-light); }
+.section-block.tags    .section-label { color: #b8d4e8; }
+
+.section-content {
+  font-family: var(--font-body);
+  font-size: 0.9rem;
+  line-height: 1.75;
+  color: var(--text-primary);
+}
+
+.section-block.hook .section-content,
+.section-block.caption .section-content {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: 1rem;
+  color: var(--pink-light);
+}
+
+/* To-do list */
+.todo-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.todo-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+  padding: 0.4rem 0.5rem;
+  border-radius: var(--radius-sm);
+  transition: background 0.2s ease;
+}
+
+.todo-item:hover {
+  background: rgba(232, 160, 184, 0.06);
+}
+
+.todo-num {
+  flex-shrink: 0;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: rgba(232, 160, 184, 0.18);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.68rem;
+  font-family: var(--font-body);
+  font-weight: 700;
+  color: var(--pink-mid);
+}
+
+.todo-text {
+  font-family: var(--font-body);
+  font-size: 0.88rem;
+  line-height: 1.55;
+  color: #f0d5df;
+  padding-top: 2px;
+}
+
+/* Hashtag chips */
+.hashtag-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+}
+
+.hashtag-chip {
+  padding: 0.28rem 0.7rem;
+  background: rgba(184, 212, 232, 0.08);
+  border: 1px solid rgba(184, 212, 232, 0.2);
+  border-radius: 999px;
+  font-size: 0.72rem;
+  font-family: var(--font-body);
+  color: #b8d4e8;
+}
+
+/* Detail nav bottom */
+.detail-nav-bottom {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 1.2rem;
+}
+
+/* ============================================================
+   ANIMATIONS
+   ============================================================ */
+@keyframes shimmer {
+  0%   { background-position: 0% 50%; }
+  50%  { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(18px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ============================================================
+   SCROLLBAR
+   ============================================================ */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: var(--bg-deep);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--pink-deep);
+  border-radius: 999px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--pink-mid);
+}
+
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
+@media (max-width: 640px) {
+  .app-header {
+    padding: 2.5rem 1rem 1.5rem;
+  }
+
+  .day-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.75rem;
+    padding: 1.5rem 1rem 3rem;
+  }
+
+  .detail-wrapper {
+    padding: 0 1rem 3rem;
+  }
+
+  .detail-header {
+    padding: 1.5rem 1.2rem 1.2rem;
+  }
+
+  .detail-body {
+    padding: 1.2rem 1.2rem 1.5rem;
+  }
+
+  .detail-actions {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .detail-nav-bottom {
+    gap: 0.5rem;
+  }
+}
+
+@media (max-width: 380px) {
+  .day-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 0.6rem;
+  }
+}
